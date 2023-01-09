@@ -1,1 +1,51 @@
-<p>add-employee works!</p>
+<app-header></app-header>
+<mat-card class="card">
+  <h4>Add Employee</h4>
+  <form [formGroup]="employeeForm" (ngSubmit)="onAddEmployee()">
+    <mat-form-field class="form" appearance="outline">
+      <mat-label>Username</mat-label>
+      <input formControlName="username" matInput placeholder="Ex. johndoe"/>
+    </mat-form-field>
+    <mat-form-field class="form" appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input formControlName="firstName" matInput placeholder="Ex. John"/>
+    </mat-form-field>
+    <mat-form-field class="form" appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input formControlName="lastName" matInput placeholder="Ex. Doe"/>
+    </mat-form-field>
+    <mat-form-field class="form" appearance="outline">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput type="email" placeholder="Ex. something@email.com"/>
+      <mat-error *ngIf="hasError">{{hasError()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form" appearance="outline">
+      <mat-label>Birth Date</mat-label>
+      <input formControlName="birthDate" matInput [max]="endDate" [matDatepicker]="picker"/>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="form" appearance="outline">
+      <mat-label>Basic Salary</mat-label>
+      <input formControlName="salary" matInput placeholder="0" type="number"/>
+    </mat-form-field>
+    <mat-form-field class="form" appearance="outline">
+      <mat-label>Status</mat-label>
+      <input formControlName="status" matInput placeholder="Ex. Officer"/>
+    </mat-form-field>
+    <mat-form-field class="form" appearance="outline">
+      <mat-label>Group</mat-label>
+      <mat-select formControlName="group" placeholder="Group">
+        <mat-option *ngFor="let group of groups" [value]="group.value">
+          {{group.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="form" appearance="outline">
+      <mat-label>Description</mat-label>
+      <input formControlName="description" matInput placeholder="Additional Information"/>
+    </mat-form-field>
+    <button mat-raised-button color="primary" style="margin-right: 10px"  type="submit">Submit</button>
+    <button mat-raised-button color="warn" (click)="onClose()">Cancel</button>
+  </form>
+</mat-card>

@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {SessionService} from "../../shared/services/session.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-logout',
-  templateUrl: './logout.component.html',
-  styleUrls: ['./logout.component.css']
+  template: ''
 })
-export class LogoutComponent {
+export class LogoutComponent implements OnInit {
+  constructor(
+    private readonly sessionService: SessionService,
+    private readonly router: Router,
+  ) {
+  }
 
+  ngOnInit(): void {
+    this.sessionService.remove('token');
+    this.router.navigateByUrl('login').finally();
+  }
 }
